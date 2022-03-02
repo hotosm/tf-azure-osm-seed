@@ -13,7 +13,7 @@ module "resources" {
 
   environment          = "staging"
   subscriptionId       = var.subscriptionId
-  region               = "West Europe"
+  region               = "East US"
   aks_node_count       = 1
 
   admin_email          = ""

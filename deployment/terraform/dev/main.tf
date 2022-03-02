@@ -11,7 +11,7 @@ module "resources" {
 
   environment          = "dev"
   subscriptionId       = var.subscriptionId
-  region               = "West Europe"
+  region               = "East US"
   aks_node_count       = 1
   admin_email          = ""
   domain               = ""
