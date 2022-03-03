@@ -1,3 +1,4 @@
+/*
 resource "helm_release" "osmseed-cert-manager" {
   name             = "cert-manager"
   repository       = "https://charts.jetstack.io"
@@ -11,3 +12,4 @@ resource "helm_release" "osmseed-cert-manager" {
     value = true
   }
 }
+*/

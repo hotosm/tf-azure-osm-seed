@@ -5,25 +5,12 @@ resource "helm_release" "osmseed" {
   version = "0.1.0-n625.h614bf1d"
   wait = false
   depends_on = [
-    helm_release.osmseed-ingress-nginx,
-    helm_release.osmseed-cert-manager
+
   ]
 
-  #FIXME: many more values to add
   set {
-    name  = "environment"
-    value = var.environment
+    name = "cloudProvider"
+    value = "azure"
   }
 
-  set {
-    name  = "domain"
-    value = var.domain
-  }
-
-  set {
-    name = "adminEmail"
-    value = var.admin_email
-  }
-
-  
 }

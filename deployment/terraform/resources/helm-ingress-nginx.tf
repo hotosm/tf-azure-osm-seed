@@ -1,3 +1,4 @@
+/*
 resource "helm_release" "osmseed-ingress-nginx" {
   name             = "ingress-nginx"
   repository       = "https://kubernetes.github.io/ingress-nginx"
@@ -19,3 +20,4 @@ resource "helm_release" "osmseed-ingress-nginx" {
   }
 
 }
+*/
