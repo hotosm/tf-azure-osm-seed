@@ -9,6 +9,12 @@ services:
         # For Terraform
         - TF_VAR_username=${USER}
         - TF_VAR_subscriptionId=${subscriptionId}
+        - TF_VAR_mailerAddress=${mailerAddress}
+        - TF_VAR_mailerDomain=${mailerDomain}
+        - TF_VAR_mailerFrom=${mailerFrom}
+        - TF_VAR_mailerUsername=${mailerUsername}
+        - TF_VAR_mailerPassword=${mailerPassword}
+        - TF_VAR_mailerPort=${mailerPort}
         - ARM_SUBSCRIPTION_ID=${subscriptionId}
         - ARM_TENANT_ID=${tenantId}
         - ARM_CLIENT_ID=${servicePrincipalId}
