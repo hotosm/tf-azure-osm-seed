@@ -22,8 +22,8 @@ module "resources" {
 terraform {
   backend "azurerm" {
     resource_group_name  = "osmseedterraformdev"
-    storage_account_name = "osmseedterraformstate"
-    container_name       = "osmseed-dev"
+    storage_account_name = "tfazureosmseed"
+    container_name       = "tf-azure-osm-seed"
     key                  = "production.terraform.tfstate"
   }
 }
