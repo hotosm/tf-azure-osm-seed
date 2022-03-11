@@ -49,9 +49,12 @@ variable "osmseed_test_resources_rg" {
 
 locals {
   stack_id              = "osmseed"
+  # change this to whoever is hosting.
+  # this is used to make the storage account unique
+  owner                 = "hot"
   location              = lower(replace(var.region, " ", ""))
   prefix                = "${local.stack_id}-${var.environment}"
   prefixnodashes        = "${local.stack_id}${var.environment}"
-  storage               = (var.environment == "production" ? "${local.stack_id}tf${var.environment}" : "${local.stack_id}${var.environment}")
+  storage               = "${local.stack_id}${local.stack_id}${var.environment}"
   deploy_secrets_prefix = "${local.stack_id}-${var.environment}"
 }
