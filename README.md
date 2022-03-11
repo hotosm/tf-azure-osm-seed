@@ -37,3 +37,49 @@ az role assignment create --assignee "{service_principal_object_id}" \
 --role "User Access Administrator" \
 --scope "/subscriptions/{id}/resourceGroups/{osm-seed_rg_name}"
 ```
+
+```
+az role assignment create --assignee "{service_principal_object_id}" \
+--role "Reader" \
+--scope "/subscriptions/{id}/resourceGroups/{osm-seed_rg_name}"
+```
+
+```
+az role assignment create --assignee "{service_principal_object_id}" \
+--role "Azure Kubernetes Service RBAC Admin" \
+--scope "/subscriptions/{id}/resourceGroups/{osm-seed_rg_name}"
+```
+
+Create a custom role to provide required access for creating and deploying a stack.
+
+1. Save the following as osm-seed-role.json
+
+```
+{
+    "Name": "OSM Seed Deployer",
+    "IsCustom": true,
+    "Description": "Can create and maintain an OSM Seed Stack.",
+    "Actions": [
+       "Microsoft.Authorization/roleAssignments/write"
+    ],
+    "NotActions": [
+    ],
+    "AssignableScopes": [
+      "/subscriptions/{id}
+    ]
+}
+```
+
+2. Create the role definition
+
+```
+az role definition create --role-definition osm-seed-role.json
+```
+
+3. Assign the role to the subscription
+
+```
+az role assignment create --assignee "{service_principal_object_id}" \
+--role "OSM Seed Deployer" \
+--scope "/subscriptions/{id}/"
+```
