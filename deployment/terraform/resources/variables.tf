@@ -29,6 +29,29 @@ variable "subscriptionId" {
   type = string
 }
 
+variable "mailerAddress" {
+  type = string
+}
+
+variable "mailerDomain" {
+  type = string
+}
+
+variable "mailerFrom" {
+  type = string
+}
+
+variable "mailerUsername" {
+  type = string
+}
+
+variable "mailerPassword" {
+  type = string
+}
+
+variable "mailerPort" {
+  type = number
+}
 
 # -----------------
 # Attach ACR

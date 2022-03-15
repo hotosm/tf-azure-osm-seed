@@ -15,6 +15,12 @@ jobs:
     timeout-minutes: 60
     env:
       TF_VAR_username: github
+      mailerAddress: ${{ secrets.MAILER_ADDRESS }}
+      mailerDomain: ${{ secrets.MAILER_DOMAIN }}
+      mailerFrom: ${{ secrets.MAILER_FROM }}
+      mailerUsername: ${{ secrets.MAILER_USERNAME }}
+      mailerPassword: ${{ secrets.MAILER_PASSWORD }}
+      mailerPort: ${{ secrets.MAILER_PORT }}
       subscriptionId: ${{ secrets.TERRAFORM_SUBSCRIPTION_ID }}
       tenantId: ${{ secrets.TERRAFORM_TENANT_ID }}
       servicePrincipalId: ${{ secrets.TERRAFORM_SERVICE_PRINCIPAL_ID }}
