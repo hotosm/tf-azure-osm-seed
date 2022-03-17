@@ -8,10 +8,9 @@ resource "helm_release" "osmseed" {
 
   ]
 
-  set {
-    name = "cloudProvider"
-    value = "azure"
-  }
+  values = [
+    "${file("values.yaml")}"
+  ]
 
   set {
     name = "web.env.MAILER_ADDRESS"
