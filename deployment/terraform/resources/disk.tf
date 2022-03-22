@@ -8,7 +8,7 @@ resource "azurerm_managed_disk" "osmseed_db" {
 
   tags = {
     Environment = var.environment
-    ManagedBy   = var.owner
+    ManagedBy   = local.owner
   }
 }
 
