@@ -20,6 +20,8 @@ db:
       cpu: '1'
   nodeSelector:
     enabled: false
+  persistenceDisk:
+    enabled: true
 
 # ====================================================================================================
 # Variables for osm-seed website
