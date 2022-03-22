@@ -9,7 +9,7 @@ resource "helm_release" "osmseed" {
   ]
 
   values = [
-    "${file("./values.yaml")}"
+    "${file("${path.module}/values.yaml")}"
   ]
 
   set {
