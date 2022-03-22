@@ -67,6 +67,11 @@ variable "osmseed_test_resources_rg" {
   default = "osmseedterraformdev"
 }
 
+variable "osmseed_db_disk_size" {
+  type = string
+  default = "2048"
+}
+
 # -----------------
 # Local variables
 
