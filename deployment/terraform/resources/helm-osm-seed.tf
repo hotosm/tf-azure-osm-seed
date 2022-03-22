@@ -42,4 +42,20 @@ resource "helm_release" "osmseed" {
     name = "web.env.MAILER_PORT"
     value = var.mailerPort
   }
+
+  set {
+    name = "db.persistenceDisk.AZURE_diskName"
+    value = azurerm_managed_disk.osmseed_db.name
+  }
+
+  set {
+    name = "db.persistenceDisk.AZURE_diskURI"
+    value = azurerm_managed_disk.osmseed_db.id
+  }
+
+  set {
+    name = "db.persistenceDisk.AZURE_diskSize"
+    value = var.osmseed_db_disk_size
+  }
+
 }
