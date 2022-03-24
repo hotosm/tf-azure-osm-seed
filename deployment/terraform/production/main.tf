@@ -30,9 +30,6 @@ variable "mailerPort" {
   type = number
 }
 
-variable "domain" {
-  type = string
-}
 module "resources" {
   source = "../resources"
 
