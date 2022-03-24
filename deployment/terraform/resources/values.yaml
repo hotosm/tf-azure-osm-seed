@@ -2,6 +2,9 @@
 
 # Specify cloud provider - choices are "azure", "minikube", "aws" or "gcp"
 cloudProvider: "azure"
+domain:
+  enabled: true
+  domainName: 52.226.232.236
 
 # Uncomment when ingress is implemented
 # serviceType: "ClusterIP"
