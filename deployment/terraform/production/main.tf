@@ -30,6 +30,9 @@ variable "mailerPort" {
   type = number
 }
 
+variable "domain" {
+  type = string
+}
 module "resources" {
   source = "../resources"
 
@@ -44,8 +47,7 @@ module "resources" {
   mailerPassword       = var.mailerPassword
   mailerPort           = var.mailerPort
   admin_email          = ""
-
-  domain = ""
+  domain               = "52.226.232.236"
 }
 
 terraform {
