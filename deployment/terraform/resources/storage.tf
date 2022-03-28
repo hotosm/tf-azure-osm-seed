@@ -6,4 +6,8 @@ resource "azurerm_storage_account" "osmseed" {
   account_replication_type = "LRS"
 }
 
-#FIXME: storage containers
+resource "azurerm_storage_container" "replication" {
+  name                  = "replication"
+  storage_account_name  = azurerm_storage_account.osmseed.name
+  container_access_type = "private"
+}

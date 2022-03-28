@@ -2,7 +2,7 @@ resource "helm_release" "osmseed" {
   name  = "osmseed-helm"
   repository = "https://devseed.com/osm-seed-chart"
   chart = "osm-seed"
-  version = "1.0.0-dev.h3d60424"
+  version = "1.0.0-dev.h4a425b3"
   wait = false
   depends_on = [
 
@@ -36,7 +36,6 @@ resource "helm_release" "osmseed" {
     name = "web.env.MAILER_FROM"
     value = var.mailerFrom
   }
-
   set {
     name = "web.env.MAILER_PORT"
     value = var.mailerPort
@@ -57,4 +56,20 @@ resource "helm_release" "osmseed" {
     value = var.osmseed_db_disk_size
   }
 
+  set {
+    name  = "AZURE_STORAGE_CONNECTION_STRING"
+    value = azurerm_storage_account.osmseed.primary_connection_string
+  }
+  set {
+    name  = "AZURE_STORAGE_ACCESS_KEY"
+    value = azurerm_storage_account.osmseed.primary_access_key
+  }
+  set {
+    name  = "AZURE_CONTAINER_NAME"
+    value = "replication"
+  }
+  set {
+    name = "AZURE_STORAGE_ACCOUNT"
+    value = "${local.storage}"
+  }
 }
