@@ -47,9 +47,7 @@ export service_principal_object_id=<clientId>
 ```
 
 2. Storage Key
-   For the storage account created earlier, go to the Azure Portal > Access Keys and copy a `key`. This should be supplied is `TERRAFORM_STORAGE_KEY`
-
-![image](https://user-images.githubusercontent.com/1152236/160679936-7f245d40-994b-4e6b-aaa1-f54eadc61207.png)
+   For the storage account created earlier, go to the [Azure Portal > Access Keys]((https://user-images.githubusercontent.com/1152236/160679936-7f245d40-994b-4e6b-aaa1-f54eadc61207.png)) and copy a `key`. This should be supplied is `TERRAFORM_STORAGE_KEY`
 
 3. Role assignment
    To let Terraform create a role assignment for AKS to for network setup. It requires run the following command lines
