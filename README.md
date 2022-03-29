@@ -17,45 +17,68 @@ To deploy OSM Seed from this repo to Microsoft Azure, some resources need to be 
 For Github Actions to run the `scripts/cideploy` script, a few secrets need to be setup in this repo.
 
 1. Service Principal
-Create a service principal at the subscription level. `az ad sp create-for-rbac --name "osm-seed-terraform-deploy" --sdk-auth`. The secrets associated with this SP that should be added in the GH secrets are:
-* `TERRAFORM_SERVICE_PRINCIPAL_ID` (client id)
-* `TERRAFORM_SERVICE_PRINCIPAL_KEY` (client key)
-* `TERRAFORM_SUBSCRIPTION_ID`
-* `TERRAFORM_TENANT_ID`
+   Create a service principal at the subscription level. `az ad sp create-for-rbac --name "osm-seed-terraform-deploy" --sdk-auth`. ouput will be liek so
+
+```json
+{
+  "clientId": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "clientSecret": "xxxx.xxxxxxxxxxxx",
+  "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxx",
+  "tenantId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxx",
+  ...
+}
+```
+
+The secrets associated with this SP that should be added in the GH secrets are:
+
+- `TERRAFORM_SERVICE_PRINCIPAL_ID` (clientId)
+- `TERRAFORM_SERVICE_PRINCIPAL_KEY` (clientSecret)
+- `TERRAFORM_SUBSCRIPTION_ID` (subscriptionId)
+- `TERRAFORM_TENANT_ID` (tenantId)
+
+also export some values that is going to be require for next steps: 
+
+```sh
+export resource_group_name=osmseedterraformdev
+export subscriptionId=<subscriptionId>
+export service_principal_object_id=<clientId>
+# export service_principal_object_id=$(az ad sp list --display-name "osm-seed-terraform-deploy" | jq .[].appId)
+
+```
 
 2. Storage Key
-For the storage account created earlier, go to the Azure Portal > Access Keys and copy a `key`. This should be supplied is `TERRAFORM_STORAGE_KEY`
+   For the storage account created earlier, go to the Azure Portal > Access Keys and copy a `key`. This should be supplied is `TERRAFORM_STORAGE_KEY`
+
+![image](https://user-images.githubusercontent.com/1152236/160679936-7f245d40-994b-4e6b-aaa1-f54eadc61207.png)
 
 3. Role assignment
-To let Terraform create a role assignment for AKS to for network setup. It requires `service_principal_object_id` that was created in the previous step.
+   To let Terraform create a role assignment for AKS to for network setup. It requires run the following command lines
 
-* First find the service principal object id `az ad sp list --display-name "osm-seed-terraform-deploy"`
-* Then run:
 
-```
-az role assignment create --assignee "{service_principal_object_id}" \
---role "User Access Administrator" \
---scope "/subscriptions/{id}/resourceGroups/{osm-seed_rg_name}"
+```sh
+az role assignment create --assignee "${service_principal_object_id}" \
+  --role "User Access Administrator" \
+  --scope "/subscriptions/${subscriptionId}/resourceGroups/${resource_group_name}"
 ```
 
-```
-az role assignment create --assignee "{service_principal_object_id}" \
---role "Reader" \
---scope "/subscriptions/{id}/resourceGroups/{osm-seed_rg_name}"
+```sh
+az role assignment create --assignee "${service_principal_object_id}" \
+  --role "Reader" \
+  --scope "/subscriptions/${subscriptionId}/resourceGroups/${resource_group_name}"
 ```
 
-```
-az role assignment create --assignee "{service_principal_object_id}" \
---role "Azure Kubernetes Service RBAC Admin" \
---scope "/subscriptions/{id}/resourceGroups/{osm-seed_rg_name}"
+```sh
+az role assignment create --assignee "${service_principal_object_id}" \
+  --role "Azure Kubernetes Service RBAC Admin" \
+  --scope "/subscriptions/${subscriptionId}/resourceGroups/${resource_group_name}"
 ```
 
 Create a custom role to provide required access for creating and deploying a stack.
 
 1. Save the following as osm-seed-role.json
 
-```
-{
+```sh
+echo '''{
     "Name": "OSM Seed Deployer",
     "IsCustom": true,
     "Description": "Can create and maintain an OSM Seed Stack.",
@@ -65,9 +88,9 @@ Create a custom role to provide required access for creating and deploying a sta
     "NotActions": [
     ],
     "AssignableScopes": [
-      "/subscriptions/{id}
+      "/subscriptions/'${subscriptionId}'"
     ]
-}
+}''' > osm-seed-role.json
 ```
 
 2. Create the role definition
@@ -78,8 +101,8 @@ az role definition create --role-definition osm-seed-role.json
 
 3. Assign the role to the subscription
 
-```
-az role assignment create --assignee "{service_principal_object_id}" \
---role "OSM Seed Deployer" \
---scope "/subscriptions/{id}/"
+```sh
+az role assignment create --assignee "${service_principal_object_id}" \
+  --role "OSM Seed Deployer" \
+  --scope "/subscriptions/${subscriptionId}"
 ```
