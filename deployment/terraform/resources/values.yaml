@@ -6,6 +6,12 @@ domain:
   enabled: true
   domainName: 52.226.232.236
 
+domain: "osm-seed-hot.ds.io"
+
+serviceType: "ClusterIP"
+
+adminEmail: "sanjay@developmentseed.org"
+
 # Uncomment when ingress is implemented
 # serviceType: "ClusterIP"
 
