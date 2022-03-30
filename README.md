@@ -17,7 +17,7 @@ To deploy OSM Seed from this repo to Microsoft Azure, some resources need to be 
 For Github Actions to run the `scripts/cideploy` script, a few secrets need to be setup in this repo.
 
 1. Service Principal
-   Create a service principal at the subscription level. `az ad sp create-for-rbac --name "osm-seed-terraform-deploy" --sdk-auth`. ouput will be liek so
+   Create a service principal at the subscription level. `az ad sp create-for-rbac --name "osm-seed-terraform-deploy" --sdk-auth`. The output should look like:
 
 ```json
 {
