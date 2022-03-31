@@ -2,7 +2,7 @@ resource "helm_release" "osmseed" {
   name  = "osmseed-helm"
   repository = "https://devseed.com/osm-seed-chart"
   chart = "osm-seed"
-  version = "0.1.0-n649.h25b9b56"
+  version = "0.1.0-n650.h2d59159"
   wait = false
   depends_on = [
 
