@@ -2,9 +2,6 @@
 
 # Specify cloud provider - choices are "azure", "minikube", "aws" or "gcp"
 cloudProvider: "azure"
-domain:
-  enabled: true
-  domainName: 52.226.232.236
 
 domain: "osm-seed-hot.ds.io"
 
