@@ -104,3 +104,10 @@ az role assignment create --assignee "${service_principal_object_id}" \
   --role "OSM Seed Deployer" \
   --scope "/subscriptions/${subscriptionId}"
 ```
+
+## Configure an external iD instance
+OSM Seed comes with the default iD version as part of the OSM rails application. It is possible to use a custom instance like RapiD to point to the OSM Seed API.
+To do this:
+
+- Signing into the OSM Seed instance and creatgea new OAuth Application and get a Consumer Key and Secret.
+- Modify the relevant values in your iD instance: https://github.com/facebookincubator/RapiD/blob/main/index.html#L50
