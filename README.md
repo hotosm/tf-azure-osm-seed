@@ -106,8 +106,38 @@ az role assignment create --assignee "${service_principal_object_id}" \
 ```
 
 ## Configure an external iD instance
+
 OSM Seed comes with the default iD version as part of the OSM rails application. It is possible to use a custom instance like RapiD to point to the OSM Seed API.
 To do this:
 
 - Signing into the OSM Seed instance and creatgea new OAuth Application and get a Consumer Key and Secret.
 - Modify the relevant values in your iD instance: https://github.com/facebookincubator/RapiD/blob/main/index.html#L50
+
+
+## Configuration options in values.yaml
+
+There are several things that can be configured by editing the `values.yaml` file, found in `deployment/terraform/resources`. These are various options passed to the `osm-seed` helm chart, that will control enabling and disabling various services and jobs, as well as managing things like data imports.
+
+### Configuring your domain name
+
+To point a domain name to your osm-seed instance:
+
+For this example, let's say you want to point the domain `osm-seed.example.com` to your osm-seed instance. This would mean that the Helm templates would make the web service accessible at `web.osm-seed.example.com`. If you have other services enabled, they would be available at their respective subdomains - for eg. Overpass would be available at `overpass.osm-seed.example.com`.
+
+You will need to edit the `domain` definition in your `values.yaml` file with the domain that is being pointed. So, for our example, that would be `osm-seed.example.com`. You should also edit the `adminEmail` value in the `values.yaml` file with your email address. This will be used as the email address when registering Lets Encrypt SSL certificates.
+
+Additionally, you will need to create a single `A` record pointing a wildcard record for your domain name to the IP address of your kubernetes cluster. You can find out the IP address of your cluster by checking for the External Cluster IP when doing `kubectl get ingress` or by looking at the Ingress definitions in Lens. So, if the IP address of the cluster is 123.123.123.123 you would create an `A` record for `*.osm-seed.example.com` that points to `123.123.123.123`. The `osm-seed` helm chart should then handle configuring the domain names to point to the correct services as well as provisioning SSL. You should now be able to visit `web.osm-seed.example.com` in your browser.
+
+
+### Importing data
+
+You will often want to import data into your osm-seed instance from a PBF file. This can be accomplished by:
+
+ - Edit the `values.yaml` to set `populateApiDb.enabled` to `true`
+ - Set `populateApiDb.env.URL_FILE_TO_IMPORT` to a publicly accessible URL of the PBF file you wish to import
+ - Deploy the stack with this configuration
+ - A container should be spun up that imports the PBF. You can check the container logs by looking at `kubectl get pods` or the pods in Lens.
+ - The process should complete and your data should be imported.
+ - After the data is imported, we recommend setting `populateApiDb.enabled` to `false` and re-deploying, to prevent accidentally re-importing the same data.
+ - You can also repeat the process for a different PBF file to import more data.
+
