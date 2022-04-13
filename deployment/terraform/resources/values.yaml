@@ -3,11 +3,11 @@
 # Specify cloud provider - choices are "azure", "minikube", "aws" or "gcp"
 cloudProvider: "azure"
 
-domain: "osm-seed-hot.ds.io"
+domain: "damage-assessment.hotosm.org"
 
 serviceType: "ClusterIP"
 
-adminEmail: "sanjay@developmentseed.org"
+adminEmail: "dk@hotosm.org"
 
 # Uncomment when ingress is implemented
 # serviceType: "ClusterIP"
