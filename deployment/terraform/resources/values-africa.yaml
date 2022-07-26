@@ -155,7 +155,7 @@ replicationJob:
 # Variables for osm-seed to pupulate the apidb
 # ====================================================================================================
 populateApidb:
-  enabled: false
+  enabled: true
   image:
     name: ''
     tag: ''
