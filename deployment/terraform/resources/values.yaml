@@ -169,5 +169,7 @@ populateApidb:
     limits:
       memory: '2Gi'
       cpu: '2.5'
+  nodeSelector:
+    enabled: false
 
 
