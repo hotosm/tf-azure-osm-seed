@@ -174,3 +174,5 @@ populateApidb:
     label_key: foo
     label_value: bar
 
+nominatimApi:
+  enabled: false
