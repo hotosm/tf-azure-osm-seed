@@ -171,5 +171,6 @@ populateApidb:
       cpu: '2.5'
   nodeSelector:
     enabled: false
-
+    label_key: foo
+    label_value: bar
 
