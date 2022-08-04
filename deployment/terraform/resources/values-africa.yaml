@@ -143,7 +143,7 @@ replicationJob:
 # Variables for osm-seed to pupulate the apidb
 # ====================================================================================================
 populateApidb:
-  enabled: true
+  enabled: false
   env:
     URL_FILE_TO_IMPORT: 'http://download.geofabrik.de/africa-latest.osm.pbf'
   resources:
