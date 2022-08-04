@@ -73,9 +73,6 @@ memcached:
 # ====================================================================================================
 fullHistory:
   enabled: false
-  image:
-    name: ''
-    tag: ''
   schedule: '* * * * *'
   env:
     OVERWRITE_FHISTORY_FILE: false
@@ -93,9 +90,6 @@ fullHistory:
 # ====================================================================================================
 dbBackupRestore:
   enabled: false
-  image:
-    name: ''
-    tag: ''
   schedule: '* * * * *'
   env:
     DB_ACTION: backup
@@ -115,9 +109,6 @@ dbBackupRestore:
 # ====================================================================================================
 planetDump:
   enabled: false
-  image:
-    name: ''
-    tag: ''
   schedule: '* * * * *'
   env:
     OVERWRITE_PLANET_FILE: false
@@ -137,9 +128,6 @@ planetDump:
 # ====================================================================================================
 replicationJob:
   enabled: false
-  image:
-    name: ''
-    tag: ''
   resources:
     enabled: false
     requests:
@@ -156,9 +144,6 @@ replicationJob:
 # ====================================================================================================
 populateApidb:
   enabled: true
-  image:
-    name: ''
-    tag: ''
   env:
     URL_FILE_TO_IMPORT: 'http://download.geofabrik.de/africa-latest.osm.pbf'
   resources:
